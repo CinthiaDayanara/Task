@@ -1,0 +1,27 @@
+version: '3'
+services:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  usuarios:
+    build: ./user
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+
+  tareas:
+    build: ./task
+    ports:
+      - "5001:5001"
+    depends_on:
+      - redis
+
+  notificaciones:
+    build: ./notification
+    ports:
+      - "5002:5002"
+    depends_on:
+      - redis
