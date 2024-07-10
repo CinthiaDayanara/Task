@@ -4,21 +4,24 @@ services:
     image: "redis:alpine"
     ports:
       - "6379:6379"
-  tareas:
-    build: ./task
-    ports:
-      - "5001:5000"
-    depends_on:
-      - redis
+
   usuario:
-    build: ./user
+    build: ./usuario
     ports:
-      - "5002:5000"
+      - "5000:5000"
     depends_on:
       - redis
-  notificacion:
-    build: ./notification
+
+  tareas:
+    build: ./tareas
     ports:
-      - "5003:5000"
+      - "5001:5001"
+    depends_on:
+      - redis
+
+  notificacion:
+    build: ./notificacion
+    ports:
+      - "5002:5002"
     depends_on:
       - redis
